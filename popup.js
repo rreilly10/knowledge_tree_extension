@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', function () {
 
-    var test = document.getElementById("firstText").innerHTML;
-    document.getElementById("secondText").innerHTML = test;
-
+    if (document.getElementById("firstText") != null) {
+        var test = document.getElementById("firstText").innerHTML;
+        document.getElementById("secondText").innerHTML = test;
+    }
 });

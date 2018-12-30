@@ -1,18 +1,16 @@
 {
-    "name": "Knowledge Tree",
+    "manifest_version": 2,
+    "name": "test",
+    "description": "useless",
     "version": "1.0",
-    "description": "Knowledge Tree Extension",
     "permissions": [
         "activeTab",
-        "declarativeContent",
-        "storage"
+        "tabs",
+        "history",
+        "http://*/*"
     ],
-    "page_action": {
-        "default_popup": "popup.html"
-    },
     "background": {
         "scripts": [
-            "background.js",
             "popup.js"
         ],
         "persistent": false
@@ -27,5 +25,7 @@
             ]
         }
     ],
-    "manifest_version": 2
+    "browser_action": {
+        "default_popup": "popup.html"
+    }
 }
