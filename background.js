@@ -11,10 +11,16 @@ chrome.runtime.onInstalled.addListener(function () {
             actions: [new chrome.declarativeContent.ShowPageAction()]
         }]);
     });
+});
+
+chrome.tabs.onCreated.addListener(function (tab) {
+    console.log("Tab:" + tab.url);
+});
+
+chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
     chrome.history.search({ text: '', maxResults: 10 }, function (data) {
         data.forEach(function (page) {
             console.log(page.url);
-            page_txt += page.url;
         });
     });
 });
