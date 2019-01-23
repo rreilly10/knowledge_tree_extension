@@ -41,18 +41,21 @@ var previouslyActive = null; // Variable to know of the most recently activated 
 var head = null; // The origination of a new chain (created when a new tab is created)
 
 chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
-    let tmp = new HistoryEntry(tab.url, tab.title, null, null);
+    if (changeInfo.status === 'complete') {
 
-    if (!head) {
-        head = tmp;
-        previouslyActive = head;
-        console.log(head);
+        let tmp = new HistoryEntry(tab.url, tab.title, null, null);
+
+        if (!head) {
+            head = tmp;
+            previouslyActive = head;
+            console.log(head);
+        }
+
+        if (previouslyActive.url !== tmp.url) {
+            previouslyActive.child = tmp;
+            previouslyActive = tmp;
+        }
+
+        console.log(showChain(head));
     }
-
-    if (previouslyActive.url !== tmp.url) {
-        previouslyActive.child = tmp;
-        previouslyActive = tmp;
-    }
-
-    console.log(showChain(head));
 });
