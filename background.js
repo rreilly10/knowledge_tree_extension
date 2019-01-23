@@ -40,30 +40,19 @@ function showChain(historyEntry) {
 var previouslyActive = null; // Variable to know of the most recently activated tab
 var head = null; // The origination of a new chain (created when a new tab is created)
 
-chrome.tabs.onCreated.addListener(function (tab) {
+chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
     let tmp = new HistoryEntry(tab.url, tab.title, null, null);
 
     if (!head) {
         head = tmp;
+        previouslyActive = head;
+        console.log(head);
     }
-    previouslyActive = tmp;
 
-});
+    if (previouslyActive.url !== tmp.url) {
+        previouslyActive.child = tmp;
+        previouslyActive = tmp;
+    }
 
-chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
-    let tmp = new HistoryEntry(tab.url, tab.title, null, null);
-
-    previouslyActive = addChild(previouslyActive, tmp)
     console.log(showChain(head));
-
-
-
-
-    // LAST 10 HISTORY ELEMENTS
-    // chrome.history.search({ text: '', maxResults: 10 }, function (data) {
-    //     data.forEach(function (page) {
-    //         console.log(page.url);
-    //     });
-    // });
-
 });
