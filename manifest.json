@@ -8,11 +8,14 @@
         "tabs",
         "history"
     ],
+    "page_action": {
+        "default_popup": "popup.html"
+    },
     "background": {
         "scripts": [
             "background.js"
         ],
-        "persistent": false
+        "persistent": true
     },
     "manifest_version": 2
 }

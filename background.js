@@ -48,13 +48,20 @@ chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
         if (!head) {
             head = tmp;
             previouslyActive = head;
-            console.log(head);
         }
 
         if (previouslyActive.url !== tmp.url) {
             previouslyActive.child = tmp;
             previouslyActive = tmp;
         }
+
+        chrome.runtime.sendMessage({
+            msg: "chain",
+            data: {
+                subject: "chain",
+                content: "chain test"
+            }
+        });
 
         console.log(showChain(head));
     }
