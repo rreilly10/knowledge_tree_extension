@@ -55,13 +55,17 @@ chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
             previouslyActive = tmp;
         }
 
-        chrome.runtime.sendMessage({
+        msg = {
             msg: "chain",
             data: {
                 subject: "chain",
                 content: "chain test"
             }
-        });
+        }
+
+        console.log(msg);
+
+        chrome.runtime.sendMessage(msg);
 
         console.log(showChain(head));
     }
